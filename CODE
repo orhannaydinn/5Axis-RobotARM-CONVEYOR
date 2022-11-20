@@ -1,0 +1,150 @@
+#include <Servo.h>
+
+Servo altsase;
+      Servo altdestek;
+            Servo ortadestek;
+                   Servo ustdestek;
+                         Servo baslikdestek;
+                               Servo baslik;
+
+const int motorPin1  = 8;
+const int motorPin2  = 4;
+const int irsensor = 7;
+uint32_t zaman_hareket = 300;
+
+boolean servo, okuma_izin = 0;
+
+uint32_t degisken = 0;
+
+void setup() {
+
+
+  altsase.attach(3
+  altdestek.attach(5);
+  ortadestek.attach(6);
+  ustdestek.attach(9);
+  baslikdestek.attach(10);
+  baslik.attach(11);
+  Serial.begin(9600);
+
+
+  pinMode(motorPin1, OUTPUT);
+  pinMode(motorPin2, OUTPUT);
+  digitalWrite(motorPin1, LOW);
+  digitalWrite(motorPin2, HIGH);
+
+  servo_baslangic();
+
+}
+
+
+void servo_baslangic()//kjonumlar tamam
+{
+  altsase.write(90);
+  delay(zaman_hareket);
+
+  altdestek.write(130);
+  delay(zaman_hareket);
+
+  ortadestek.write(110);
+  delay(zaman_hareket);
+
+  ustdestek.write(90);
+  delay(zaman_hareket);
+
+  baslikdestek.write(0);
+  delay(zaman_hareket);
+
+  baslik.write(150);
+  delay(zaman_hareket);
+
+  Serial.print("Bsalangic");
+  Serial.print("\t");
+}
+
+void servo_al()
+{
+  
+  altsase.write(90);
+  delay(100);
+
+  altdestek.write(120);
+  delay(10);
+  
+  ortadestek.write(110);
+  delay(10);
+
+  
+
+  ortadestek.write(5);
+  delay(10);
+
+
+  ustdestek.write(100);
+  delay(zaman_hareket);
+
+ 
+
+  baslikdestek.write(30);
+  delay(zaman_hareket);
+
+  baslik.write(0);
+  delay(zaman_hareket);
+
+  Serial.print("Al");
+  Serial.print("\t");
+}
+
+
+void servo_birak()
+{
+  
+  altdestek.write(120);
+  delay(200);
+  altsase.write(150);
+  
+
+  
+  
+  
+  ortadestek.write(60);
+  
+
+  baslikdestek.write(20);
+  delay(zaman_hareket);
+
+  delay(100);
+  baslik.write(30);
+  delay(zaman_hareket);
+
+  
+
+  Serial.print("Birak");
+  Serial.print("\t");
+}
+
+void loop() {
+ /* int irdeger = digitalRead(irsensor);
+  Serial.println(irdeger);
+
+  if (degisken != irdeger)
+  {
+    degisken = irdeger;
+    if(irdeger==1){ 
+     digitalWrite(motorPin1, 0);
+    digitalWrite(motorPin2, 1);
+    Serial.print("Motor calis");
+   /* servo_baslangic()*/ // ;} 
+    
+    /*
+    else if(irdeger==0){    digitalWrite(motorPin1, 0);
+    digitalWrite(motorPin2, 0);
+    Serial.print("Motor Dur");
+    servo_al();
+    servo_birak();
+   servo_baslangic();}
+  }
+
+  Serial.print("\n");*/
+servo_al();
+}
